@@ -7,6 +7,8 @@ import nltk
 try:
     nltk.data.find('corpora/stopwords')
 except LookupError:
+    # Download the 'punkt' tokenizer data
+    nltk.download('punkt')
     nltk.download('stopwords')
 
 
