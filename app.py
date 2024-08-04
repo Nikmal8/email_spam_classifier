@@ -13,9 +13,15 @@ except LookupError:
     nltk.download('punkt')
     nltk.download('stopwords')
 
+# Load the fitted TF-IDF vectorizer
+with open('vectorizer.pkl', 'rb') as f:
+    tfidf = pickle.load(f)
+
+# Load the trained model
+with open('model.pkl', 'rb') as f:
+    model = pickle.load(f)
 
 ps = PorterStemmer()
-
 
 def transform_text(text):
     text = text.lower()
@@ -40,9 +46,6 @@ def transform_text(text):
         y.append(ps.stem(i))
 
     return " ".join(y)
-
-tfidf = pickle.load(open('vectorizer.pkl','rb'))
-model = pickle.load(open('model.pkl','rb'))
 
 st.title("Email/SMS Spam Classifier")
 
