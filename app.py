@@ -9,6 +9,17 @@ try:
 except LookupError:
     nltk.download('stopwords')
 
+# Sample data for fitting the vectorizer
+corpus = [
+    "This is the first document.",
+    "This document is the second document.",
+    "And this is the third one.",
+    "Is this the first document?"
+]
+
+# Create and fit the vectorizer
+tfidf = TfidfVectorizer()
+tfidf.fit(corpus)
 
 ps = PorterStemmer()
 
