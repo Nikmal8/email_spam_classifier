@@ -1,43 +1,17 @@
-from sklearn.feature_extraction.text import TfidfVectorizer
-
-# Sample data for fitting the vectorizer
-corpus = [
-    "This is the first document.",
-    "This document is the second document.",
-    "And this is the third one.",
-    "Is this the first document?"
-]
-
-# Create and fit the vectorizer
-tfidf = TfidfVectorizer()
-tfidf.fit(corpus)
-
-# Save the fitted vectorizer
-pickle.dump(tfidf, open('vectorizer.pkl', 'wb'))
-Download NLTK Data: Ensure the necessary NLTK data is downloaded within the script. This should be done before using any NLTK functionalities.
-Here's a complete version of your app.py script with these considerations:
-
-python
-Copy code
 import streamlit as st
 import pickle
 import string
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
 import nltk
-
-# Ensure NLTK data is downloaded
 try:
     nltk.data.find('corpora/stopwords')
 except LookupError:
     nltk.download('stopwords')
 
-try:
-    nltk.data.find('tokenizers/punkt')
-except LookupError:
-    nltk.download('punkt')
 
 ps = PorterStemmer()
+
 
 def transform_text(text):
     text = text.lower()
@@ -63,7 +37,6 @@ def transform_text(text):
 
     return " ".join(y)
 
-# Load the vectorizer and model
 tfidf = pickle.load(open('vectorizer.pkl','rb'))
 model = pickle.load(open('model.pkl','rb'))
 
@@ -72,6 +45,7 @@ st.title("Email/SMS Spam Classifier")
 input_sms = st.text_area("Enter the message")
 
 if st.button('Predict'):
+
     # 1. preprocess
     transformed_sms = transform_text(input_sms)
     # 2. vectorize
