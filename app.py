@@ -6,6 +6,7 @@ from nltk.stem.porter import PorterStemmer
 import nltk
 try:
     nltk.data.find('corpora/stopwords')
+    nltk.data.find('tokenizers/punkt')
 except LookupError:
     # Download the 'punkt' tokenizer data
     nltk.download('punkt')
