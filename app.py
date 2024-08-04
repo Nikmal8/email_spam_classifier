@@ -2,6 +2,7 @@ import streamlit as st
 import pickle
 import string
 from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
 from sklearn.feature_extraction.text import TfidfVectorizer
 from nltk.stem.porter import PorterStemmer
 import nltk
